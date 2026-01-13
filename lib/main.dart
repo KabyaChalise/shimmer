@@ -125,29 +125,8 @@ class _LoadingDemoPageState extends State<LoadingDemoPage> with SingleTickerProv
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
             child: _isLoading
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.grey.shade500),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      const Text('Loading Data...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                    ],
-                  )
-                : const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.refresh, size: 22),
-                      SizedBox(width: 8),
-                      Text('Load Data', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                    ],
-                  ),
+                ? const Text('Loading Data...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600))
+                : Text('Load Data', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           ),
         ),
       ),
