@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +38,7 @@ class _LoadingDemoPageState extends State<LoadingDemoPage> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -76,10 +77,11 @@ class _LoadingDemoPageState extends State<LoadingDemoPage> with SingleTickerProv
               indicatorWeight: 3,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white70,
-              labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+              labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
               tabs: const [
-                Tab(icon: Icon(Icons.refresh, size: 20), text: 'Circular Progress'),
-                Tab(icon: Icon(Icons.auto_awesome, size: 20), text: 'Shimmer Effect'),
+                Tab(icon: Icon(Icons.refresh, size: 20), text: 'Circular'),
+                Tab(icon: Icon(Icons.auto_awesome, size: 20), text: 'Shimmer'),
+                Tab(icon: Icon(Icons.grid_on, size: 20), text: 'Skeletonizer'),
               ],
             ),
           ),
@@ -88,7 +90,10 @@ class _LoadingDemoPageState extends State<LoadingDemoPage> with SingleTickerProv
       body: Column(
         children: [
           Expanded(
-            child: TabBarView(controller: _tabController, children: [_buildCircularProgressTab(), _buildShimmerTab()]),
+            child: TabBarView(
+              controller: _tabController,
+              children: [_buildCircularProgressTab(), _buildShimmerTab(), _buildSkeletonizerTab()],
+            ),
           ),
           _buildLoadButton(),
         ],
@@ -235,6 +240,14 @@ class _LoadingDemoPageState extends State<LoadingDemoPage> with SingleTickerProv
           ),
         );
       },
+    );
+  }
+
+  // ---------- SKELETONIZER TAB ----------
+  Widget _buildSkeletonizerTab() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Skeletonizer(enabled: _isLoading, child: _buildContent()),
     );
   }
 
